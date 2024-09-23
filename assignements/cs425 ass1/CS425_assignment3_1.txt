@@ -1,0 +1,120 @@
+------------------------------------------------------------------------------------------------------------------- No. -   Time            Source               Destination        protocol     info    
+   1       0.000000   192.168.2.145    128.119.245.12    ICMP         Echo (ping) request
+   2      0.001744      192.168.1.1           192.168.2.145     ICMP         Time-to-live exceeded 
+   3      0.013063      192.168.2.245   128.119.245.12    ICMP         Echo (ping) request    
+  4      0.043627     192.168.2.245     192.168.1.1         UDP      Source port:1097  destination port:domain
+ 5      0.044904      10.14.10.1             192.168.2.145    ICMP        Time-to-live exceeded   
+6       0.046529         192.168.1.1        192.168.2.145    UDP      Source port:domain  destination port:1097
+
+Frame 1 (70 bytes on wire, 70 bytes captured)
+
+Ethernet II, Src: Netgear_61:8e:6d (00:09:5b:61:8e:6d), Dst: LinksysG_45:90:a8 (00:00:41:45:90:a8)
+
+Internet Protocol, src: 192.168.2.145 (192.168.2.145), Dst: 128.119.245.12 (128.119.245.12)
+
+Version: 4
+
+Header length: 20 bytes
+
+Differentiated services Field: 0x00 (DSCP 0x00: Default; ECN: 0x00)
+
+Total Length: 56
+
+Identification: 0x80b2 (32946)
+
+Flags: 0x00
+
+0... = Reserved bit: Not set
+
+.0.. = Don't fragment: Not set
+
+..0. = More fragments: Not set
+
+Fragment offset: 0
+
+Time to live: 1
+
+Protocol: ICMP (0x01)
+
+Header checksum: 0x0056 [correct]
+
+Source: 192.168.2.145 (192.168.2.145)
+
+Destination: 128.119.245.12 (128.119.245.12)
+
+- Internet Control Message Protocol
+
+Type: 8 (Echo (ping) request)
+
+Code: 0
+
+Checksum: 0x0818 [correct]
+
+Identifier: 0x0400
+
+Sequence number: 256 (0x0100)
+
+Data (28 bytes)
+-------------------------------------------------------------------------------------------------------------------
+
+
+
+Let’s consider the above IPv4 packet (given the above information ) and its various fields. Please answer the
+following questions.
+1. Within the IP packet header, what is the value in the upper layer protocol field?
+answer 1. Upper Layer Protocol Field:
+   The value in the upper layer protocol field of the IP packet header is indicated by the "Protocol" field. For this packet, the Protocol is ICMP (Internet Control Message Protocol), with a hexadecimal value of 0x01.
+
+
+
+
+2. How many bytes are in the IP header? How many bytes are in the payload of the IP
+datagram? Explain how you determined the number of payload bytes.
+answer 2. Bytes in the IP Header and Payload:
+
+    IP Header Bytes: The header length is specified in the "Header length" field. It is 20 bytes long for this packet.
+    Payload Bytes: The Total Length field specifies the entire packet size, including the header and payload. For this packet, the total length is 56 bytes. To find the payload size, we  subtract the header length from the total length: 56 bytes (total)−20 bytes (header)=36 bytes (payload)56 bytes (total)−20 bytes (header)=36 bytes (payload).
+
+
+3. Has this IP datagram been fragmented? Explain how you determined whether or not
+the datagram has been fragmented.
+answer 3. 
+The datagram has not been fragmented. This can be determined from the "Flags" field:
+
+    The "Don't fragment" bit is not set (.0..), allowing fragmentation if necessary.
+    The "More fragments" bit is also not set (..0.), indicating this packet is either the only fragment or the last one.
+    The "Fragment offset" field is 0, which further indicates this packet has not been fragmented or is the first fragment.
+
+4. What is the value in the Identification field and the TTL field?
+answer 4. 
+Identification Field Value: The value in the Identification field is 0x80b2, which translates to 32946 in decimal.
+TTL Field Value: The TTL (Time to Live) field value is 1.
+
+
+
+Solution 
+
+
+
+2. Bytes in IP Header and Payload:
+
+The IP header length is determined by the value in the header length field, which is 20 bytes in this case. The header length field specifies the length of the IP header in 32-bit words, so 20 bytes correspond to 5 words (20/4 = 5).
+The total length field in the IP header indicates the total length of the IP datagram including both the header and the payload. In this case, the total length is 56 bytes.
+To determine the number of bytes in the payload, we subtract the length of the header (20 bytes) from the total length of the datagram. Therefore, the payload size is 56 bytes - 20 bytes = 36 bytes.
+Fragmentation:
+
+The IP header includes fields related to fragmentation: the Don't Fragment (DF) flag and the Fragment Offset field.
+The DF flag is not set (0), indicating that the packet can be fragmented if necessary.
+The Fragment Offset field is 0, indicating that this is the first fragment if the packet were to be fragmented. However, since the More Fragments flag is not set (0), this packet has not been fragmented.
+Identification and TTL Fields:
+
+The Identification field in the IP header has a value of 0x80b2 (32946 in decimal).
+The TTL (Time to Live) field in the IP header has a value of 1.
+In summary:
+
+Upper Layer Protocol Field: ICMP
+Bytes in IP Header: 20 bytes
+Bytes in Payload: 36 bytes
+Fragmentation: No, the packet has not been fragmented.
+Identification Field Value: 32946 (0x80b2)
+TTL Field Value: 1

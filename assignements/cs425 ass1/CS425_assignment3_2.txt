@@ -1,0 +1,111 @@
+-----------------------------------------------------------------------------------------------------------------
+No.  time                source              destination  protocol      info         
+121  94.577386  192.168.2.145  128.119.245.12  IP          Fragmented IP protocol (proto-ICMP 0x01, off
+122  94.577589  192.168.2.145  128.119.245.12  ICMP  Echo (ping) request
+123  94.608735  192.168.2.145  128.119.245.12  IP         Fragmented IP protocol (proto-ICMP 0x01, off
+124  94.608927 192.168.2.145   128.119.245.12  ICMP  Echo (ping) request
+125  94.648592  192.168.2.145  128.119.245.12  IP          Fragmented IP protocol (proto-ICMP 0x01, off
+126  94.648735  192.168.2.145   128.119.245.12  ICMP  Echo (ping) request
+127  94.688689  92.168.2.145    128.119.245.12  IP          Fragmented IP protocol (proto-ICMP 0x01, off 
+128  94.688856  192.168.2.145   128.119.245.12  ICMP  Echo (ping) request
+129  94.728729  192.168.2.145   128.119.245.12  IP          Fragmented IP protocol (proto-ICMP 0x01, off
+130  94.728865  192.168.2.145  128.119.245.12  ICMP     Echo (ping) request
+131   94.768840  192.168.2.145  128.119.245.12  IP          Fragmented IP protocol (proto-ICMP 0x01, off
+132   94.769035 192.168.2.145  128.119.245.12  ICMP    Echo (ping) request
+133  94.808870  192.168.2.145  128.119.245.12  IP          Fragmented IP protocol (proto-ICMP 0x01, off
+134  94.809020  192.168.2.145   128.119.245.12  ICMP  Echo (ping) request
+135  94.848911    192.168.2.145   128.119.245.12  IP          Fragmented IP protocol (proto-ICMP 0x01, off
+136  94.849084   192.168.2.145   128.119.245.12  ICMP  Echo (ping) request
+
+Frame 121 (1514 bytes on wire, 1514 bytes captured)
+
+Ethernet II, src: Netgear_61:8e:6d (00:09:5b:61:8e:6d), Dst: LinksysG_45:90:a8 (00:00:41:45:90:a8)
+
+Internet Protocol, src: 192.168.2.145 (192.168.2.145), Dst: 128.119.245:12 (128.119.245.12)
+
+version: 4
+
+Header length: 20 bytes
+
+Differentiated Services Field: 0x00 (DSCP 0x00: Default; ECN: 0x00)
+
+Total Length: 1500
+
+Identification: 0x80fa (33018)
+
+Flags: 0x02 (More Fragments)
+
+0... Reserved bit: Not set
+
+.0... Don't fragment: Not set
+
+..1. More fragments: Set
+
+Fragment offset: 0
+
+Time to live: 1
+
+Protocol: ICMP (0x01)
+
+Header checksum: 0xda69 [correct]
+
+Source: 192.168.2.145 (192.168.2.145)
+
+Destination: 128.119.245.12 (128.119.245.12)
+
+Reassembled IP in frame: 122
+
+Data (1480 bytes)
+
+
+0000  00  0c  41    45   90  a8  00  09      5b  61  8e  6d  08  00  45  00      ..AE....         [a.m..E.
+0010   05  dc  80   fa     20  00  01   01       da 69  c0  a8  02  91  80  77        .... ...              .i.....w
+0020  f5    0c  08   00   c8  02  04   00     2f  00  35  45  50  69  6e  57        ........              /.5EPing
+0030  50   6c  6f    74   74   65   72   32      2e  36  30  35  45  50  69  6e       plotter2      .605EPin 
+0040  67   50  6c    6f   74   74   65   72      32  2e  36  30  35  45   50  69       gplotter     2.605EPi
+-------------------------------------------------------------------------------------------------------------
+
+
+Let’s concentrate on the above packet fields (given above ).
+5. Can you say whether the message corresponding to the above packet has been
+fragmented?
+answer 5. 
+Yes, the message corresponding to the above packet has been fragmented. This is indicated by the presence of the "Fragmented IP protocol" information in the packet descriptions.
+
+6. What information in the IP header indicates that the datagram been fragmented?
+answer 6. 
+Fragmentation Information in IP Header:
+The following fields in the IP header provide information about fragmentation:
+Flags: The Flags field contains information about fragmentation. In this case, the "More Fragments" flag is set, indicating that there are more fragments to follow.
+Fragment Offset: The Fragment Offset field specifies the offset of the current fragment relative to the beginning of the original unfragmented datagram. In this case, the Fragment Offset is 0 for the first fragment.
+
+7. What information in the IP header indicates whether this is the first fragment versus a
+latter fragment?
+
+answer 7.
+The presence of the "More Fragments" flag being set in the Flags field indicates that this is not the last fragment of the original datagram.
+Additionally, the Fragment Offset being 0 indicates that this is the first fragment. Subsequent fragments would have non-zero values in the Fragment Offset field to indicate their position relative to the original datagram.
+
+
+
+solution  
+
+5.  Fragmentation:
+
+Yes, the message corresponding to the above packet has been fragmented. This is indicated by the presence of the "Fragmented IP protocol" information in the packet descriptions.
+
+6.Fragmentation Information in IP Header:
+The following fields in the IP header provide information about fragmentation:
+Flags: The Flags field contains information about fragmentation. In this case, the "More Fragments" flag is set, indicating that there are more fragments to follow.
+Fragment Offset: The Fragment Offset field specifies the offset of the current fragment relative to the beginning of the original unfragmented datagram. In this case, the Fragment Offset is 0 for the first fragment.
+
+7. Indication of First Fragment vs. Later Fragment:
+The presence of the "More Fragments" flag being set in the Flags field indicates that this is not the last fragment of the original datagram.
+Additionally, the Fragment Offset being 0 indicates that this is the first fragment. Subsequent fragments would have non-zero values in the Fragment Offset field to indicate their position relative to the original datagram.
+
+
+In summary:
+5. Yes, the message has been fragmented.
+
+The Flags field and the Fragment Offset field in the IP header indicate fragmentation.
+The "More Fragments" flag being set and the Fragment Offset being 0 indicate that this is the first fragment of the datagram.

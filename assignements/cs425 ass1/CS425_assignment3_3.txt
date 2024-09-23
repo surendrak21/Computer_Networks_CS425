@@ -1,0 +1,112 @@
+
+-----------------------------------------------------------------------------------------------------------------
+No.  time          source       destination    protocol      info         
+121  94.577386  192.168.2.145  128.119.245.12  IP          Fragmented IP protocol (proto-ICMP 0x01, off
+122  94.577589  192.168.2.145  128.119.245.12  ICMP          Echo (ping) request
+123  94.608735  192.168.2.145  128.119.245.12  IP         Fragmented IP protocol (proto-ICMP 0x01, off
+124  94.608927 192.168.2.145   128.119.245.12  ICMP         Echo (ping) request
+125  94.648592  192.168.2.145  128.119.245.12  IP          Fragmented IP protocol (proto-ICMP 0x01, off
+126  94.648735  192.168.2.145   128.119.245.12  ICMP        Echo (ping) request
+127  94.688689  92.168.2.145    128.119.245.12  IP          Fragmented IP protocol (proto-ICMP 0x01, off 
+128  94.688856  192.168.2.145   128.119.245.12  ICMP       Echo (ping) request
+129  94.728729  192.168.2.145   128.119.245.12  IP          Fragmented IP protocol (proto-ICMP 0x01, off
+130  94.728865  192.168.2.145  128.119.245.12  ICMP          Echo (ping) request
+131   94.768840  192.168.2.145  128.119.245.12  IP          Fragmented IP protocol (proto-ICMP 0x01, off
+132   94.769035 192.168.2.145  128.119.245.12  ICMP        Echo (ping) request
+133  94.808870  192.168.2.145  128.119.245.12  IP          Fragmented IP protocol (proto-ICMP 0x01, off
+134  94.809020  192.168.2.145   128.119.245.12  ICMP       Echo (ping) request
+135  94.848911    192.168.2.145   128.119.245.12  IP          Fragmented IP protocol (proto-ICMP 0x01, off
+136  94.849084   192.168.2.145   128.119.245.12  ICMP       Echo (ping) request
+
+
+Frame 122 (534 bytes on wire, 534 bytes captured)
+
+Ethernet II, Src: Netgear_61:8e:6d (00:09:5b:61:8e:6d), Dst: LinksysG_45:90:a8 (00:00:41:45:90:a8)
+
+Internet Protocol, src: 192.168.2.145 (192.168.2.145), Dst: 128.119.245.12 (128.119.245.12)
+
+Version: 4
+
+Header length: 20 bytes
+
+Differentiated services Field: 0x00 (DSCP 0x00: Default; ECN: 0x00)
+
+Total Length: 520
+
+Identification: 0x80fa (33018)
+
+Flags: Ox
+
+0... Reserved bit: Not set
+
+.0.. Don't fragment: Not set
+
+..0. More fragments: Not set
+
+Fragment offset: 1480
+
+Time to live: 1
+
+Protocol: ICMP (0x01)
+
+Header checksum: 0xfd84 [correct]
+
+Source: 192.168.2.145 (192.168.2.145)
+
+Destination: 128.119.245.12 (128.119.245.12)
+
+[IP Fragments (1980 bytes): #121(1480), #122(500)
+[Frame: 121, payload: 0-1479 (1480 bytes)]
+[Frame: 122, payload: 1480-1979 (500 bytes)]
+Internet Control Message Protocol
+
+0000   08  00  c8  02  04  00  2f  00      35  45  50  69  6e  67  50  6c      ....../.           5EPingPl
+0010   6f  74  74  65  72  32  2e  36      30  35  45  50  69  6e  67  50      otter2.6          05EPingP  
+0020   6c  6f  74  74  65  72  32  2e      36  30  35  45  50  69  6e  67     lotter2.           605EPing
+0030   50  6c  6f  74  74  65  72  32      2e  36  30  35  45  50  69  6e     Plotter2          .605EPin
+0040   67  50  6c  6f  74  74  65  72      32  2e  36  30  35  45  50  69     gplotter          2.605EP1
+------------------------------------------------------------------------------------------------------------
+
+Let’s concentrate on the above packet fields ( given above ).
+8. What information in the IP header indicates that this is not the first datagram
+fragment?
+answer 8.
+The "More Fragments" flag in the Flags field of the IP header is not set (0), indicating that this is the last fragment of the original datagram. In Frame 122, the Fragment offset is 1480 bytes, indicating that this fragment is not the first one. The Fragment offset value specifies the offset of the data in the current fragment relative to the start of the original unfragmented datagram.
+
+
+9. Are the more fragments? How can you tell?
+answer 9.
+No, there are no more fragments. This can be determined by checking the "More Fragments" flag in the Flags field of the IP header, which is not set (0). When this flag is set, it indicates that there are more fragments to follow. Since it's not set in this case, there are no more fragments.
+
+10. If Fig. 2 and Fig. 3 are the 1st and 2nd fragments of a message, then what fields change
+in the IP header between the first and second fragment?
+answer 10.
+    Fields Change Between First and Second Fragment:
+
+    Fragment Offset: This is the primary field that changes between the first and second fragment. In Fig. 2 (Frame 121), the offset is 0, indicating the beginning of the data. In Fig. 3 (Frame 122), the offset is 1480, indicating this fragment's data begins at byte 1480 of the original datagram.
+    Flags: Specifically, the "More fragments" flag could change if the second fragment is the last one, indicating there are no further fragments. However, according to the given information for Frame 122, the flags field description doesn't align with the standard notation, making it hard to compare directly. Typically, if the first fragment has the "More fragments" flag set and the second one does not, it would indicate the second fragment is the last one.
+    Total Length: This field changes to reflect the size of the individual fragment. Frame 121 has a total length of 1500 bytes (typical for a maximally sized fragment due to MTU limits), while Frame 122 shows a total length of 520 bytes, indicating the size of the second fragment.
+
+
+
+Solution
+
+
+
+
+Let's analyze the provided packet:
+
+8. Indication of Not Being the First Datagram Fragment:
+
+The "More Fragments" flag in the Flags field of the IP header is not set (0), indicating that this is the last fragment of the original datagram.
+Additionally, the Fragment Offset field has a non-zero value (1480), indicating that this is not the first fragment. The Fragment Offset specifies the offset of the current fragment relative to the beginning of the original unfragmented datagram.
+
+9. Presence of More Fragments:
+
+No, there are no more fragments. This can be determined by checking the "More Fragments" flag in the Flags field of the IP header, which is not set (0). When this flag is set, it indicates that there are more fragments to follow. Since it's not set in this case, there are no more fragments.
+10.
+Changes in IP Header Between First and Second Fragments:
+
+If Fig. 2 and Fig. 3 are the 1st and 2nd fragments of a message, then the following fields change in the IP header between the first and second fragment:
+Flags: In the first fragment, the "More Fragments" flag is set (1), indicating that there are more fragments. In the second fragment, this flag is not set (0), indicating that it's the last fragment.
+Fragment Offset: In the first fragment, the Fragment Offset field is typically 0 or a multiple of 8. In the second fragment, this field contains the offset of the current fragment relative to the beginning of the original unfragmented datagram, usually a multiple of 8 or the maximum payload size. In this case, the Fragment Offset is 1480, indicating the position of the second fragment in the original datagram.
